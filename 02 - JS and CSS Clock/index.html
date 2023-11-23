@@ -63,13 +63,30 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      rotate: 90deg;
     }
 
   </style>
 
   <script>
+    const secHand = document.querySelector('.second-hand');
+    const minHand = document.querySelector('.min-hand');
+    const hrHand = document.querySelector('.hour-hand');
 
+    function setHands() {
+        const time = new Date();
+        const secs = time.getSeconds();
+        const mins = time.getMinutes();
+        const hrs = time.getHours();
 
+        secHand.style.transform = "rotate(" + (secs * 6) + "deg)";
+        minHand.style.transform = "rotate(" + (mins * 6) + "deg)";
+        hrHand.style.transform = "rotate(" + ((hrs % 12) * 30) + "deg)";
+    }
+
+    window.onload = setHands;
+    setInterval(setHands, 1000);
   </script>
 </body>
 </html>
